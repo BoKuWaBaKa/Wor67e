@@ -421,3 +421,30 @@ input:checked + .slider { background: #10B981; }
 input:checked + .slider:before { transform: translateX(20px); }
 .slider.round { border-radius: 24px; }
 .slider.round:before { border-radius: 50%; }
+
+/* Responsive Styles for Mobile */
+@media (max-height: 700px) {
+    #board-container { padding: 5px; }
+    #board { max-height: 380px; grid-gap: 4px; }
+    button[data-key] { height: 48px; font-size: 1rem; }
+    #keyboard-container { padding: 0 4px 10px; gap: 6px; }
+    .keyboard-row { gap: 4px; }
+    header { height: 45px; padding: 0.2rem 1rem; }
+    .logo { font-size: 1.8rem; }
+}
+
+@media (max-height: 600px) {
+    #board { max-height: 300px; grid-gap: 3px; }
+    button[data-key] { height: 42px; font-size: 0.9rem; }
+    .tile { font-size: 1.4rem; }
+    #keyboard-container { padding: 0 4px 5px; gap: 4px; }
+}
+
+@media (max-width: 450px) {
+    #board { grid-gap: 4px; }
+    button[data-key] { font-size: 0.85rem; border-radius: 3px; margin: 0; }
+    .keyboard-row { gap: 4px; }
+    #keyboard-container { padding: 0 4px 15px; gap: 6px; }
+    .tile { font-size: 1.5rem; }
+    .logo { font-size: 1.8rem; }
+}
