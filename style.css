@@ -423,28 +423,51 @@ input:checked + .slider:before { transform: translateX(20px); }
 .slider.round:before { border-radius: 50%; }
 
 /* Responsive Styles for Mobile */
+@media (max-width: 600px) {
+    /* Main Board Layout */
+    #board-container { padding: 4px; }
+    #board {
+        max-width: 240px;
+        grid-gap: 3px;
+        aspect-ratio: 6 / 7;
+    }
+    .row { grid-gap: 3px; }
+    .tile { font-size: 1.1rem; border-width: 1px; }
+    
+    /* Keyboard */
+    #keyboard-container { padding: 0 4px 6px; gap: 3px; }
+    .keyboard-row { gap: 3px; }
+    button[data-key] { height: 32px; font-size: 0.7rem; border-radius: 3px; margin: 0; padding: 0; }
+    
+    /* Modals & Messages */
+    .modal-content {
+        padding: 12px;
+        width: 95%;
+        max-width: 280px;
+        margin-top: 15px;
+    }
+    .message { padding: 8px 12px; font-size: 0.8rem; }
+    
+    /* Header */
+    header { height: 40px; padding: 0.2rem 0.5rem; }
+    .logo { font-size: 1.3rem; }
+}
+
+@media (max-width: 380px) {
+    /* Even smaller phones */
+    #board { max-width: 210px; grid-gap: 2px; }
+    .row { grid-gap: 2px; }
+    .tile { font-size: 1rem; }
+    button[data-key] { height: 28px; font-size: 0.6rem; }
+    .keyboard-row { gap: 2px; }
+    #keyboard-container { padding: 0 2px 4px; gap: 2px; }
+    .modal-content { padding: 8px; max-width: 250px; }
+}
+
 @media (max-height: 700px) {
-    #board-container { padding: 5px; }
-    #board { max-height: 380px; grid-gap: 4px; }
-    button[data-key] { height: 48px; font-size: 1rem; }
-    #keyboard-container { padding: 0 4px 10px; gap: 6px; }
-    .keyboard-row { gap: 4px; }
-    header { height: 45px; padding: 0.2rem 1rem; }
-    .logo { font-size: 1.8rem; }
-}
-
-@media (max-height: 600px) {
-    #board { max-height: 300px; grid-gap: 3px; }
-    button[data-key] { height: 42px; font-size: 0.9rem; }
-    .tile { font-size: 1.4rem; }
-    #keyboard-container { padding: 0 4px 5px; gap: 4px; }
-}
-
-@media (max-width: 450px) {
-    #board { grid-gap: 4px; }
-    button[data-key] { font-size: 0.85rem; border-radius: 3px; margin: 0; }
-    .keyboard-row { gap: 4px; }
-    #keyboard-container { padding: 0 4px 15px; gap: 6px; }
-    .tile { font-size: 1.5rem; }
-    .logo { font-size: 1.8rem; }
+    /* Short screens (landscape or small phones) */
+    #board-container { padding: 2px; }
+    #board { max-height: 280px; max-width: 230px; }
+    button[data-key] { height: 30px; }
+    .modal-content { margin-top: 5%; }
 }
