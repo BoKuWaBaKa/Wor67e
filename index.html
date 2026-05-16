@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Wor67e - 6 Letters, 7 Guesses</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <button id="help-btn" class="icon-btn">?</button>
+            </div>
+            <h1 class="logo">Wor<span class="six-d">6</span><span class="seven-l">7</span>e</h1>
+            <div class="header-right">
+                <button id="stats-btn" class="icon-btn">📊</button>
+                <button id="settings-btn" class="icon-btn">⚙️</button>
+            </div>
+        </header>
+
+        <div id="message-container"></div>
+
+        <main id="board-container">
+            <div id="board"></div>
+        </main>
+
+        <div id="keyboard-container">
+            <div class="keyboard-row">
+                <button data-key="q">q</button>
+                <button data-key="w">w</button>
+                <button data-key="e">e</button>
+                <button data-key="r">r</button>
+                <button data-key="t">t</button>
+                <button data-key="y">y</button>
+                <button data-key="u">u</button>
+                <button data-key="i">i</button>
+                <button data-key="o">o</button>
+                <button data-key="p">p</button>
+            </div>
+            <div class="keyboard-row">
+                <div class="spacer half"></div>
+                <button data-key="a">a</button>
+                <button data-key="s">s</button>
+                <button data-key="d">d</button>
+                <button data-key="f">f</button>
+                <button data-key="g">g</button>
+                <button data-key="h">h</button>
+                <button data-key="j">j</button>
+                <button data-key="k">k</button>
+                <button data-key="l">l</button>
+                <div class="spacer half"></div>
+            </div>
+            <div class="keyboard-row">
+                <button data-key="enter" class="wide-btn">enter</button>
+                <button data-key="z">z</button>
+                <button data-key="x">x</button>
+                <button data-key="c">c</button>
+                <button data-key="v">v</button>
+                <button data-key="b">b</button>
+                <button data-key="n">n</button>
+                <button data-key="m">m</button>
+                <button data-key="backspace" class="wide-btn">⌫</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="stats-modal" class="modal hidden">
+        <div class="modal-content">
+            <button class="close-btn" id="close-stats">&times;</button>
+            <h2>Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div id="stat-played" class="stat-num">0</div>
+                    <div class="stat-label">Played</div>
+                </div>
+                <div class="stat-box">
+                    <div id="stat-win" class="stat-num">0</div>
+                    <div class="stat-label">Win %</div>
+                </div>
+                <div class="stat-box">
+                    <div id="stat-streak" class="stat-num">0</div>
+                    <div class="stat-label">Current Streak</div>
+                </div>
+                <div class="stat-box">
+                    <div id="stat-max-streak" class="stat-num">0</div>
+                    <div class="stat-label">Max Streak</div>
+                </div>
+            </div>
+            <div class="stats-footer">
+                <div id="next-word-container">
+                    <h3>Next Wor67e in</h3>
+                    <div id="countdown">--:--:--</div>
+                </div>
+                <div class="share-container">
+                    <button id="share-btn" class="action-btn">Share</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="help-modal" class="modal hidden">
+        <div class="modal-content">
+            <button class="close-btn" id="close-help">&times;</button>
+            <h2>How To Play</h2>
+            <p>Guess the Word in 7 tries.</p>
+            <ul>
+                <li>Each guess must be a valid 6-letter word.</li>
+                <li>The color of the tiles will change to show how close your guess was to the word.</li>
+            </ul>
+            <div class="example">
+                <div class="row">
+                    <div class="tile correct">W</div>
+                    <div class="tile">E</div>
+                    <div class="tile">A</div>
+                    <div class="tile">R</div>
+                    <div class="tile">Y</div>
+                    <div class="tile">S</div>
+                </div>
+                <p><strong>W</strong> is in the word and in the correct spot.</p>
+            </div>
+            <div class="example">
+                <div class="row">
+                    <div class="tile">P</div>
+                    <div class="tile present">I</div>
+                    <div class="tile">L</div>
+                    <div class="tile">L</div>
+                    <div class="tile">O</div>
+                    <div class="tile">W</div>
+                </div>
+                <p><strong>I</strong> is in the word but in the wrong spot.</p>
+            </div>
+            <div class="example">
+                <div class="row">
+                    <div class="tile">V</div>
+                    <div class="tile">A</div>
+                    <div class="tile">G</div>
+                    <div class="tile absent">U</div>
+                    <div class="tile">E</div>
+                    <div class="tile">S</div>
+                </div>
+                <p><strong>U</strong> is not in the word in any spot.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <button class="close-btn" id="close-settings">&times;</button>
+            <h2>Settings</h2>
+            <div class="setting-row">
+                <div class="setting-info">
+                    <div class="setting-title">Hard Mode</div>
+                    <div class="setting-desc">Any revealed hints must be used in subsequent guesses</div>
+                </div>
+                <div class="setting-control">
+                    <label class="switch">
+                        <input type="checkbox" id="hard-mode-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
