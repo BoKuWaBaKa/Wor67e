@@ -43,6 +43,19 @@ body {
     margin: 0 auto;
 }
 
+/* Mobile: allow full-page scroll */
+@media (max-width: 600px) {
+    body {
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+    }
+    .container {
+        height: auto;
+        min-height: 100vh;
+    }
+}
+
 /* Header */
 header {
     display: flex;
@@ -424,50 +437,37 @@ input:checked + .slider:before { transform: translateX(20px); }
 
 /* Responsive Styles for Mobile */
 @media (max-width: 600px) {
-    /* Main Board Layout */
-    #board-container { padding: 4px; }
+    /* Main Board Layout - comfortable fixed sizes, scroll if needed */
+    #board-container {
+        padding: 10px;
+        flex-grow: 0;
+        overflow: visible;
+    }
     #board {
-        max-width: 240px;
-        grid-gap: 3px;
+        max-width: 320px;
+        width: 90vw;
+        grid-gap: 5px;
         aspect-ratio: 6 / 7;
+        max-height: none;
     }
-    .row { grid-gap: 3px; }
-    .tile { font-size: 1.1rem; border-width: 1px; }
-    
-    /* Keyboard */
-    #keyboard-container { padding: 0 4px 6px; gap: 3px; }
-    .keyboard-row { gap: 3px; }
-    button[data-key] { height: 32px; font-size: 0.7rem; border-radius: 3px; margin: 0; padding: 0; }
-    
-    /* Modals & Messages */
-    .modal-content {
-        padding: 12px;
-        width: 95%;
-        max-width: 280px;
-        margin-top: 15px;
-    }
-    .message { padding: 8px 12px; font-size: 0.8rem; }
-    
+    .row { grid-gap: 5px; }
+    .tile { font-size: 1.4rem; border-width: 2px; }
+
+    /* Keyboard - comfortable tap targets */
+    #keyboard-container { padding: 8px 6px 20px; gap: 6px; flex-shrink: 0; }
+    .keyboard-row { gap: 5px; }
+    button[data-key] { height: 44px; font-size: 0.85rem; border-radius: 4px; margin: 0; }
+
     /* Header */
-    header { height: 40px; padding: 0.2rem 0.5rem; }
-    .logo { font-size: 1.3rem; }
-}
+    header { height: 48px; padding: 0.3rem 0.8rem; }
+    .logo { font-size: 1.5rem; }
 
-@media (max-width: 380px) {
-    /* Even smaller phones */
-    #board { max-width: 210px; grid-gap: 2px; }
-    .row { grid-gap: 2px; }
-    .tile { font-size: 1rem; }
-    button[data-key] { height: 28px; font-size: 0.6rem; }
-    .keyboard-row { gap: 2px; }
-    #keyboard-container { padding: 0 2px 4px; gap: 2px; }
-    .modal-content { padding: 8px; max-width: 250px; }
-}
-
-@media (max-height: 700px) {
-    /* Short screens (landscape or small phones) */
-    #board-container { padding: 2px; }
-    #board { max-height: 280px; max-width: 230px; }
-    button[data-key] { height: 30px; }
-    .modal-content { margin-top: 5%; }
+    /* Modals */
+    .modal-content {
+        padding: 16px;
+        width: 95%;
+        max-width: 340px;
+        margin-top: 20px;
+    }
+    .message { padding: 10px 14px; font-size: 0.9rem; }
 }
