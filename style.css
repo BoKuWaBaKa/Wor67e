@@ -23,14 +23,20 @@
     padding: 0;
 }
 
-body {
+html, body {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: 'Inter', sans-serif;
     display: flex;
     justify-content: center;
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
+    /* Allow scrolling on all devices */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%;
 }
 
 .container {
@@ -38,22 +44,10 @@ body {
     flex-direction: column;
     width: 100%;
     max-width: 500px;
-    height: 100%;
+    min-height: 100vh;
     position: relative;
     margin: 0 auto;
-}
-
-/* Mobile: allow full-page scroll */
-@media (max-width: 600px) {
-    body {
-        height: auto;
-        min-height: 100vh;
-        overflow-y: auto;
-    }
-    .container {
-        height: auto;
-        min-height: 100vh;
-    }
+    padding-bottom: 10px;
 }
 
 /* Header */
@@ -99,13 +93,11 @@ header {
     font-weight: bold;
 }
 
-/* Board */
 #board-container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-grow: 1;
-    overflow: hidden;
     padding: 10px;
 }
 
@@ -435,39 +427,44 @@ input:checked + .slider:before { transform: translateX(20px); }
 .slider.round { border-radius: 24px; }
 .slider.round:before { border-radius: 50%; }
 
-/* Responsive Styles for Mobile */
+/* =====================
+   RESPONSIVE — MOBILE
+   =====================
+   Strategy: use viewport-relative units so tiles and keyboard
+   always fit the screen without needing to squeeze or overflow. */
 @media (max-width: 600px) {
-    /* Main Board Layout - comfortable fixed sizes, scroll if needed */
-    #board-container {
-        padding: 10px;
-        flex-grow: 0;
-        overflow: visible;
-    }
+
+    /* --- Board --- */
+    #board-container { padding: 8px; flex-grow: 0; }
     #board {
-        max-width: 320px;
-        width: 90vw;
-        grid-gap: 5px;
-        aspect-ratio: 6 / 7;
+        /* Each tile column = (100vw - gaps - padding) / 6 */
+        width: calc(100vw - 24px);
+        max-width: 360px;
+        grid-gap: 4px;
         max-height: none;
+        aspect-ratio: 6 / 7;
     }
-    .row { grid-gap: 5px; }
-    .tile { font-size: 1.4rem; border-width: 2px; }
+    .row { grid-gap: 4px; }
+    /* Font scales with tile size */
+    .tile { font-size: clamp(0.9rem, 4vw, 1.5rem); border-width: 2px; }
 
-    /* Keyboard - comfortable tap targets */
-    #keyboard-container { padding: 8px 6px 20px; gap: 6px; flex-shrink: 0; }
-    .keyboard-row { gap: 5px; }
-    button[data-key] { height: 44px; font-size: 0.85rem; border-radius: 4px; margin: 0; }
-
-    /* Header */
-    header { height: 48px; padding: 0.3rem 0.8rem; }
-    .logo { font-size: 1.5rem; }
-
-    /* Modals */
-    .modal-content {
-        padding: 16px;
-        width: 95%;
-        max-width: 340px;
-        margin-top: 20px;
+    /* --- Keyboard --- */
+    #keyboard-container { padding: 6px 4px 16px; gap: 5px; }
+    .keyboard-row { gap: 4px; }
+    /* Keys: height scales with viewport height */
+    button[data-key] {
+        height: clamp(36px, 6vh, 54px);
+        font-size: clamp(0.65rem, 2.5vw, 0.95rem);
+        border-radius: 4px;
+        margin: 0;
+        padding: 0;
     }
-    .message { padding: 10px 14px; font-size: 0.9rem; }
+
+    /* --- Header --- */
+    header { height: 46px; padding: 0.3rem 0.6rem; }
+    .logo { font-size: clamp(1.2rem, 5vw, 1.8rem); }
+
+    /* --- Modals --- */
+    .modal-content { padding: 14px; width: 95%; max-width: 340px; }
+    .message { padding: 8px 14px; font-size: 0.85rem; }
 }
